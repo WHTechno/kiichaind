@@ -1,0 +1,456 @@
+
+## 4. CSS Basics (src/index.css)
+
+```css
+:root {
+  --primary-color: #6e45e2;
+  --secondary-color: #88d3ce;
+  --background-color: #f5f7fa;
+  --text-color: #333;
+  --light-text: #777;
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+  --warning-color: #f39c12;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+}
+
+.logo h1 {
+  color: var(--primary-color);
+}
+
+.wallet-info .connected-wallet {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.network-status {
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.network-status.connected {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.network-status.disconnected {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.wallet-address {
+  font-family: monospace;
+  background-color: #eee;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--border-radius);
+}
+
+.connect-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.connect-button:hover {
+  background-color: #5a35cf;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.connect-wallet-prompt, .wrong-network {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.connect-wallet-prompt h2, .wrong-network h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.connect-wallet-prompt p, .wrong-network p {
+  margin-bottom: 2rem;
+  color: var(--light-text);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabs button {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--light-text);
+  position: relative;
+}
+
+.tabs button.active {
+  color: var(--primary-color);
+}
+
+.tabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.panel {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 1.5rem;
+}
+
+.panel h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.loading {
+  text-align: center;
+  padding: 1rem;
+  color: var(--light-text);
+}
+
+.error {
+  color: var(--error-color);
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--error-color);
+}
+
+.success {
+  color: var(--success-color);
+  background-color: rgba(46, 204, 113, 0.1);
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--success-color);
+}
+
+/* Mining Panel Styles */
+.start-mining {
+  text-align: center;
+}
+
+.start-mining h3 {
+  margin-bottom: 0.5rem;
+}
+
+.start-mining p {
+  margin-bottom: 1.5rem;
+  color: var(--light-text);
+}
+
+.referral-input {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.referral-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.referral-input input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+}
+
+.mining-status .stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.stat .label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--light-text);
+  margin-bottom: 0.3rem;
+}
+
+.stat .value {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cooldown {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+}
+
+/* Referral Panel Styles */
+.referral-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.referral-link-container {
+  margin-bottom: 1.5rem;
+}
+
+.referral-link {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+.referral-link input {
+  flex: 1;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-right: none;
+}
+
+.referral-link button {
+  padding: 0 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  cursor: pointer;
+}
+
+.tier-info {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.tier-info h3 {
+  margin-bottom: 0.5rem;
+}
+
+.tier-info ul {
+  margin: 0.5rem 0 1rem 1rem;
+}
+
+.tier-info li {
+  margin-bottom: 0.3rem;
+}
+
+/* Quest Panel Styles */
+.quest-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.quest-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+}
+
+.quest-item.completed {
+  opacity: 0.7;
+}
+
+.quest-info h3 {
+  margin-bottom: 0.3rem;
+}
+
+.quest-info .reward {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.completed-badge {
+  background-color: var(--success-color);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.quest-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+  min-width: 100px;
+}
+
+/* Convert Panel Styles */
+.conversion-info {
+  margin-bottom: 1.5rem;
+}
+
+.balances {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.balance {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.balance .label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--light-text);
+  margin-bottom: 0.3rem;
+}
+
+.balance .value {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.convert-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.convert-button:hover {
+  background-color: #5a35cf;
+}
+
+.convert-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.notice {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: var(--light-text);
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: white;
+  border-top: 1px solid #eee;
+}
+
+.footer p {
+  margin-bottom: 0.5rem;
+  color: var(--light-text);
+}
+
+.footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Loading spinner */
+.app-loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
